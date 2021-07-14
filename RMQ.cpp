@@ -10,6 +10,9 @@ using namespace std;
 
 const int MAX_N = 1E5 + 10;
 const int SQ = 350;
+// In case of using an static number for your SQ parameter
+// you can always change caching size in order to optimize
+// your program performance
 
 int a[MAX_N], cache[SQ];
 
@@ -45,6 +48,10 @@ void apply_get_query() {
 	cin >> l >> r;
 	l--; // ---> [L, R)
 
+	// Stepping Iteration:
+	// Always iterate normally on your underlying array
+	// and incase of a possible jump (using cached data)
+	// feel free and jump and merge the data into the result
 	int result = INT_MAX;
 	int ptr = l;
 	while (ptr < r)
@@ -59,6 +66,10 @@ void apply_get_query() {
 	return result;
 }
 
+// Relaxing Function
+// It's good to develope a function called "Relax"
+// to rebuild all required information about a bucket
+// based on undelying array
 void relax(int index) {
 	cache[index] = INT_MAX;
 	for (int i = index * SQ; i < (index + 1) * SQ; i++)

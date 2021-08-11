@@ -78,8 +78,8 @@ int main() {
 	it = s.end();             //  it =   {                  }^
 	it = s.find(3);           //  it =   {      ^           }
 	it = s.find(-1); //.end() //  it =   {                  }^
-	it = s.lowerbound(2);     //  it =   {   ^              }
-	it = s.upperbound(2);     //  it =   {      ^           }
+	it = s.lower_bound(2);    //  it =   {   ^              }
+	it = s.upper_bound(2);    //  it =   {      ^           }
 
 	// there is also something named reverse_iterator
 	set<int>::reverse_iterator rit;
@@ -143,20 +143,46 @@ int main() {
 
 	int a[100] = {100, 2452134124, 42342, 34234, 53454352, 23412};
 	
-	set< pair<int, int> > k;
+	set< pair<int, string> > k;
 	for (int i = 0; i < 6; i++)
 		k.insert({a[i], i});
+	// k = {   
+	// 	{100, 0}, 
+	// 	{23412, 5}, 
+	// 	{34234, 3}, 
+	// 	{42342, 2}, 
+	// 	{53454352, 4}, 
+	// 	{2452134124, 1}   
+	// }
 
 	// using K, let us know what is index of a value!!
-	int v;
-	cin >> v;
+	int Q;
+	cin >> Q;
+	for (int i = 0; i < Q; i++) {
+		int v;
+		cin >> v;
 
-	// Linear, Non-DS, O(N)
-	for (int i = 0; i < n; i++)
-		if (a[i] == v) 
-			cout << i << endl;
+		// Logarithmic, DS, O(lg(N))
+		for (int i = 0; i < 6; i++)
+			if (a[i] == v)
+				cout << i << endl;
 
-	
+		// Logarithmic, DS, O(lg(N))
+		it = k.upper_bound({v, -1});
+		cout << (*it).second << endl;
+
+		// f(value) --> index
+		// value < 10**9
+		// index < 10**6
+	}
+
+	// lower_bound(x)      --->   >= x
+	// upper_bound(x)      --->   >  x
+	// lower_bound(x) - 1  --->   <  x
+	// upper_bound(x) - 1  --->   <= x
+
+	// Mapping!!!
+	// Go Ahaed to MAP.cpp to find more!!
 }
 
 void print_set(set<int> &s) {

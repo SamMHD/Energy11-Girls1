@@ -47,6 +47,8 @@ int main() {
 	t["armita"] = 11;
 
 	map<long long, int> compressor; // !!
+	compressor[12345678912345LL] = 12;
+	compressor[98765432198765LL] = 11;
 }
 
 void add_map(int v, string s) {
